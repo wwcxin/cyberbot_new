@@ -1,3 +1,12 @@
+## 相较[原项目](https://github.com/Akinohra/cyberbot)的简要说明
+
+- 去除[cyberbot.json](https://github.com/wwcxin/cyberbot_new/blob/main/cyberbot.json)中**bot**字段
+- 添加消息发送日志及完善消息接收日志
+- 部分框架api更改：请对比[event](https://github.com/wwcxin/cyberbot_new/blob/main/core/event.ts)文件
+- 全局替换字符：context --> e ; events --> ctx
+- 若干细节
+
+
 # CyberBot Next - 基于 NapCat 的 QQ 机器人框架
 
 <p align="center">

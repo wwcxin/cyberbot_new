@@ -729,6 +729,16 @@ class CyberBote {
             throw error;
         }
     }
+
+    // 新增：判断是否艾特bot
+    async isAtBot(e: AllHandlers['message']): Promise<boolean> {
+        if (!e || !e.message) return false;
+        const atItem = e.message.find(item => item.type === "at");
+        if (!atItem || !atItem.data) return false;
+        const qqStr = (atItem.data as { qq?: string }).qq;
+        const botInfo = await this.napcat.get_login_info();
+        return qqStr === botInfo.user_id.toString();
+    }
 }
 
 export default CyberBote

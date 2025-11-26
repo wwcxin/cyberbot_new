@@ -20,6 +20,7 @@ const plugin: Plugin = {
       if (e.raw_message === 'love') {
         // 复杂消息消息可以使用数组组合
         // await e.quick_action([Structs.text('爱你哟 '), Structs.face(66)])
+        
         await napcat.send_private_msg({
           user_id: e.sender.user_id,
           message: [
