@@ -19,8 +19,11 @@
     "lru-cache": "^11.2.2",
     "mri": "^1.2.0",
     "node-napcat-ts": "^0.4.20",
+    "openai": "^6.9.1",
     "pino": "^10.0.0",
+    "puppeteer": "^24.31.0",
     "rotating-file-stream": "^3.2.7",
+    "sharp": "^0.34.5",
     "string2argv": "^1.0.2",
     "systeminformation": "^5.27.11"
   },

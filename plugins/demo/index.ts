@@ -5,7 +5,6 @@ const plugin: Plugin = {
   name: 'demo',  // name必须与此插件文件夹命名一致, 不然可能会出问题
   version: '1.0.0',
   description: 'A simple plugin that demo using napcat',
-  
   handlers: {
     message: async (e) => {
       // 收到 hello 消息时回复 Hi there!

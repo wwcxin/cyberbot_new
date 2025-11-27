@@ -6,6 +6,14 @@
 - 全局替换字符：context --> e ; events --> ctx
 - 若干细节
 
+> [!TIP]
+> 推荐使用bun下载依赖
+```shell
+# 全局下载bun
+npm install -g bun
+# 执行安装依赖
+bun install
+```
 
 # CyberBot Next - 基于 NapCat 的 QQ 机器人框架
 
