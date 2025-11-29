@@ -662,11 +662,16 @@ class CyberBote {
     getText(e: AllHandlers['message']): string {
         try {
             if (!Array.isArray(e.message)) return "";
-            // logger.info(`Extracting text from message`);
-            const textObj = e.message.find(item => item.type === "text");
-            return textObj?.data?.text.trim() || ""; // 返回文本内容或空字符串
-        }
-        catch (error) {
+            
+            // 收集所有文本段并拼接
+            const textSegments = e.message
+                .filter(item => item.type === "text")
+                .map(item => item.data?.text || "")
+                .join("")
+                .trim();
+            
+            return textSegments;
+        } catch (error) {
             logger.error(`提取纯文本内容时发生错误:${error}`);
             return "";
         }
@@ -678,14 +683,29 @@ class CyberBote {
      */
     async getQuotedText(e: AllHandlers['message']): Promise<string> { 
         try {
-            const message_id = this.getReplyMessageId(e);
-            if (!message_id) return ""; // 提前返回无效情况
-            logger.info(`Getting quoted text for message ${message_id}`);
+            const replyId = this.getReplyMessageId(e);
+            if (!replyId) return ""; // 提前返回无效情况
+            // logger.info(`Getting quoted text for message ${message_id}`);
             // @onebot11 — 获取信息
-            const { raw_message } = await this.napcat.get_msg({
-                message_id: Number(message_id)
+            const quotedMessage = await this.napcat.get_msg({
+                message_id: Number(replyId)
             });
-            return raw_message || ""; // 确保总是返回字符串
+            // return this.getText(quotedMessage) || ''
+            try {
+                if (!Array.isArray(quotedMessage.message)) return "";
+                
+                // 收集所有文本段并拼接
+                const textSegments = quotedMessage.message
+                    .filter(item => item.type === "text")
+                    .map(item => item.data?.text || "")
+                    .join("")
+                    .trim();
+                
+                return textSegments;
+            } catch (error) {
+                logger.error(`提取被引用的文本时发生错误:${error}`);
+                return "";
+            }
         }
         catch (error) {
             logger.error(`提取被引用的文本时发生错误:${error}`);
